@@ -2,6 +2,9 @@ import streamlit as st
 from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
 import os
+from bs4 import BeautifulSoup
+import requests
+import re
 
 os.environ['OPENAI_API_KEY'] = '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'
 # after replacing thee ingredients, write the right instrunctions based on the replaced ingredients.
@@ -60,6 +63,12 @@ with col3:
 
 # url_clicked = st.button('url')
 # recipe_clicked = st.button('recipe')
+
+def get_url_recipe(url):
+    response = requests.get(url)
+    html_document = response.text
+    soup = BeautifulSoup(html_document, 'html.parser')
+    return soup
 
 def get_input_button(): 
     if (url_clicked):
