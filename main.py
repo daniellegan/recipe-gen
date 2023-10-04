@@ -10,8 +10,11 @@ template = """
 ###
 Convert the recipe to fit the user preferance based on his diet list.
 The desired format:
-ingredients: <line_separated_list_of_ingredients_names>
+ingredients: (write the ingredients line by line)
+seperate paragraph
 constructor: -||-
+seperate paragraph
+Enjoy!
 ###
 
 ###
@@ -29,6 +32,7 @@ YOUR ANSWER:
 # Recipe: 1.5 cup milk, 100g butter, 1 cup wheet.
 # Therefor your answer will be: 1.5 cup soy-milk, 100g vegan butter like Naturina, 1 cup gluten free wheet. 
 ###
+# <comma_separated_list_of_ingredients_names>
 
 prompt = PromptTemplate(
     input_variables=["diet", "recipe"],
