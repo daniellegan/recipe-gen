@@ -27,7 +27,7 @@ prompt = PromptTemplate(
 )
 
 def load_LLM():
-    llm = OpenAI(model=, temperature=0)
+    llm = OpenAI(temperature=0)
     return llm
 
 llm = load_LLM()
