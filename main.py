@@ -11,7 +11,7 @@ Below is a regular recipe that a user enterd.
 your goal is to convert the recipe to fit the user preferance based on his food diet.
 
 Below is an example:
-if hid diet is vegan and he the recepie is Milk 
+if his diet is vegan and the recepie is Milk 
 your answer will be soy-milk
 
 Beloow is a list with his diet preferance and the recipe:
