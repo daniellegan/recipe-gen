@@ -75,6 +75,7 @@ if input_recipe:
     prompt_with_values = prompt.format(diet=diet_choices, recipe=input_recipe)
     formatted_recipe = llm(prompt_with_values)
     st.write(formatted_recipe)
+    st.download_button('download recipe', formatted_recipe)
 
 
 
