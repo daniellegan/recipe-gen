@@ -7,19 +7,28 @@ os.environ['OPENAI_API_KEY'] = 'sk-JeYUKg0afGH0E6HNyxV8T3BlbkFJxbtyIRsFgl2rtIX4g
 # after replacing thee ingredients, write the right instrunctions based on the replaced ingredients.
 
 template = """
-Below is a regular recipe that a user enterd.
-your goal is to convert the recipe to fit the user preferance based on his food diet.
+###
+Convert the recipe to fit the user preferance based on his diet list.
+The desired format:
+ingredients: <line_separated_list_of_ingredients_names>
+constructor: -||-
+###
 
-Below is an example:
-if his diet is vegan and the recepie is Milk 
-your answer will be soy-milk
-
-Beloow is a list with his diet preferance and the recipe:
+###
+Beloow is a list with the diet preferance and the recipe:
 Diet:{diet},
 Recipe:{recipe}
+###
 
 YOUR ANSWER:
 """
+# if using few shot prompting:
+###
+# Below is an example:
+# Diet list: vegan, gluten free.
+# Recipe: 1.5 cup milk, 100g butter, 1 cup wheet.
+# Therefor your answer will be: 1.5 cup soy-milk, 100g vegan butter like Naturina, 1 cup gluten free wheet. 
+###
 
 prompt = PromptTemplate(
     input_variables=["diet", "recipe"],
