@@ -51,25 +51,31 @@ st.set_page_config(page_title="Recipe Generator", page_icon=":root:")
 st.title("Recipe Generator")
 
 #session
-if 'clicked' not in st.session_state:
-    st.session_state.clicked = False
+if 'clicked_url' not in st.session_state:
+    st.session_state.clicked_url = False
 
 if 'submit_clicked' not in st.session_state:
     st.session_state.submit_clicked = False
 
+if 'clicked_rec' not in st.session_state:
+    st.session_state.clicked_rec = False
+
 def click_url_button():
-    st.session_state.clicked = True
+    st.session_state.clicked_url = True
+
+def click_rec_button():
+    st.session_state.clicked_rec = True
 
 def submit_click():
     st.session_state.submit_clicked = True
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    diet_choices = st.multiselect('diet', ['vegan','sugar free', 'gluten free', 'dairy free', 'vegeterian'])
+    diet_choices = st.multiselect(label="", options=['vegan','sugar free', 'gluten free', 'dairy free', 'vegeterian'], placeholder='Choose diet preference')
 with col2:
     url_clicked = st.button('url', key=0, on_click=click_url_button)
 with col3:
-    recipe_clicked = st.button('recipe', key=1)
+    recipe_clicked = st.button('recipe', key=1, on_click=click_rec_button)
 
 def scrapping(url):
     try:
@@ -80,13 +86,13 @@ def scrapping(url):
     except: 
         return None
 
-def get_input_button(): 
-    if st.session_state.clicked:
+def get_input_button():
+    if st.session_state.clicked_url:
         col_a, col_b = st.columns(2)
         with col_a:
             input_url = st.text_input(label="", placeholder="enter url")
         with col_b:
-            st.button("submit", on_click=submit_click)
+            st.button("submit", key=2, on_click=submit_click)
             input_text = scrapping(input_url)
             if input_text is not None:
                 if st.session_state.submit_clicked:
@@ -94,16 +100,22 @@ def get_input_button():
                 else: 
                     st.session_state.submit_clicked = False
                     st.write("Error: can't read url, try another one")
-    else: 
-        if(recipe_clicked):
+    if st.session_state.clicked_rec:
+        col_a, col_b = st.columns(2)
+        with col_a:
             input_text = st.text_area(label="", placeholder="enter recipe")
-            return input_text
-    return None
+        with col_b:
+            st.button("submit", key=3, on_click=submit_click)
+            if input_text is None or st.session_state.submit_clicked:
+                st.session_state.submit_clicked = False
+                st.write("Error: not a valid text")
+                return None
+        return input_text
         
 
 input_recipe = get_input_button()
 
-if input_recipe is not None:
+if input_recipe is not None and st.session_state.submit_clicked:
     prompt_with_values = prompt.format(diet=diet_choices, recipe=input_recipe)
     formatted_recipe = llm(prompt_with_values)
     st.write(formatted_recipe)
