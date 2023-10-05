@@ -1,4 +1,5 @@
 langchain
 openai
 streamlit
+beautifulsoup4==4.12.2
 recipe_scrapers
