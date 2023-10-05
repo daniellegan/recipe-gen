@@ -3,8 +3,6 @@ from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
 import os
 from bs4 import BeautifulSoup
-import requests
-import re
 from recipe_scrapers import scrape_me
 #python -m streamlit run your_script.py
 
