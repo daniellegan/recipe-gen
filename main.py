@@ -2,7 +2,6 @@ import streamlit as st
 from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
 import os
-from bs4 import BeautifulSoup
 from recipe_scrapers import scrape_me
 #python -m streamlit run your_script.py
 
