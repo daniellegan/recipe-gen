@@ -5,10 +5,6 @@ import os
 from recipe_scrapers import scrape_me
 #python -m streamlit run your_script.py
 
-
-# creting openai env:
-os.environ['OPENAI_API_KEY'] = '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'
-
 template = """
 ###
 Convert the recipe to fit the user preferance based on his diet list.
