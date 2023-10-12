@@ -101,6 +101,7 @@ def get_input_button():
                     st.session_state.submit_clicked = False
                     st.write("Error: can't read url, try another one")
     if st.session_state.clicked_rec:
+        st.session_state.clicked_rec = False
         col_a, col_b = st.columns(2)
         with col_a:
             input_text = st.text_area(label="", placeholder="enter recipe")
@@ -120,6 +121,11 @@ if input_recipe is not None and st.session_state.submit_clicked:
     formatted_recipe = llm(prompt_with_values)
     st.write(formatted_recipe)
     st.download_button('Download recipe', formatted_recipe) 
+    st.session_state.submit_clicked = False
+    st.session_state.clicked_url = False
+
+    
+    
 
 
 
